@@ -175,10 +175,9 @@ void mouse_callback(GLFWwindow* window, double xPos, double yPos) {
 }
 #pragma endregion
 
-unsigned int LoadImageToGPU(const char* filename, GLint internalFormat, GLenum format, int textureSlot) {
+unsigned int LoadImageToGPU(const char* filename, GLint internalFormat, GLenum format) {
 	unsigned int TexBuffer;
 	glGenTextures(1, &TexBuffer);
-	glActiveTexture(GL_TEXTURE0 + textureSlot);
 	glBindTexture(GL_TEXTURE_2D, TexBuffer);
 
 	int width, height, nrChannel;
@@ -236,8 +235,8 @@ int main() {
 
 #pragma region Init Material
 		Material* myMaterial = new Material(myShader, 
-			LoadImageToGPU("container2.png", GL_RGBA, GL_RGBA, Shader::DIFFUSE),
-			LoadImageToGPU("container2_specular.png", GL_RGBA, GL_RGBA, Shader::SPECULAR),
+			LoadImageToGPU("container2.png", GL_RGBA, GL_RGBA),
+			LoadImageToGPU("container2_specular.png", GL_RGBA, GL_RGBA),
 			glm::vec3(1.0f, 1.0f, 1.0f),
 			64.0f);
 #pragma endregion
